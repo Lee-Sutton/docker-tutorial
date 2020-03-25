@@ -309,3 +309,5 @@ CONTAINER ID        IMAGE                  COMMAND                  CREATED     
 - The docker docs
     - https://docs.docker.com/engine/swarm/
 - https://dockerswarm.rocks
+- A more in depth docker tutorial
+    - https://docker-curriculum.com/
