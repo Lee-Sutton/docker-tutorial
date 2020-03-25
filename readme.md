@@ -188,6 +188,75 @@ exec "$@"
 -   **NOTE**: We can access the postgres host by using the service name "db"
 -   We don't have to use the ip address of the machine. This is called **automatic service discovery**
 
+
+- Now we can start the services.
+- First navigate to the root directory then run:
+
+```bash
+docker-compose up --build
+```
+
+- If the solution worked, you should see the following in your terminal
+
+```
+Successfully built 949bad36172b
+Successfully tagged docker-tutorial_web:latest
+docker-tutorial_db_1 is up-to-date
+docker-tutorial_web_1 is up-to-date
+Attaching to docker-tutorial_db_1, docker-tutorial_web_1
+web_1  | Operations to perform:
+web_1  |   Apply all migrations: admin, auth, contenttypes, sessions
+web_1  | Running migrations:
+web_1  |   Applying contenttypes.0001_initial... OK
+web_1  |   Applying auth.0001_initial... OK
+web_1  |   Applying admin.0001_initial... OK
+web_1  |   Applying admin.0002_logentry_remove_auto_add... OK
+web_1  |   Applying admin.0003_logentry_add_action_flag_choices... OK
+web_1  |   Applying contenttypes.0002_remove_content_type_name... OK
+web_1  |   Applying auth.0002_alter_permission_name_max_length... OK
+web_1  |   Applying auth.0003_alter_user_email_max_length... OK
+web_1  |   Applying auth.0004_alter_user_username_opts... OK
+web_1  |   Applying auth.0005_alter_user_last_login_null... OK
+web_1  |   Applying auth.0006_require_contenttypes_0002... OK
+web_1  |   Applying auth.0007_alter_validators_add_error_messages... OK
+web_1  |   Applying auth.0008_alter_user_username_max_length... OK
+web_1  |   Applying auth.0009_alter_user_last_name_max_length... OK
+web_1  |   Applying auth.0010_alter_group_name_max_length... OK
+web_1  |   Applying auth.0011_update_proxy_permissions... OK
+web_1  |   Applying sessions.0001_initial... OK
+web_1  | Watching for file changes with StatReloader
+web_1  | Performing system checks...
+web_1  |
+web_1  | System check identified no issues (0 silenced).
+web_1  | March 25, 2020 - 18:44:26
+web_1  | Django version 2.2.6, using settings 'hello_django.settings'
+web_1  | Starting development server at http://0.0.0.0:8000/
+web_1  | Quit the server with CONTROL-C.
+web_1  | [25/Mar/2020 18:44:32] "GET / HTTP/1.1" 200 16348
+web_1  | [25/Mar/2020 18:44:32] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+web_1  | [25/Mar/2020 18:44:33] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+web_1  | [25/Mar/2020 18:44:33] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+web_1  | [25/Mar/2020 18:44:33] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+db_1   | The files belonging to this database system will be owned by user "postgres".
+```
+
+- You can also navigate to http://localhost:8000 to see a running django web server
+
+
+- lastly you can see all the running docker containers by running:
+
+```bash
+docker ps
+```
+
+- you should see the following
+```
+CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS              PORTS                    NAMES
+2545c9ed8b9a        docker-tutorial_web    "sh /usr/src/app/ent…"   37 minutes ago      Up 37 minutes       0.0.0.0:8000->8000/tcp   docker-tutorial_web_1
+3969233cfb2c        postgres:12.0-alpine   "docker-entrypoint.s…"   42 minutes ago      Up 41 minutes       5432/tcp                 docker-tutorial_db_1
+```
+
+
 #### Docker compose commands
 
 -   `docker-compose build` - builds the images
@@ -239,4 +308,4 @@ exec "$@"
     - https://testdriven.io/blog/running-flask-on-docker-swarm/
 - The docker docs
     - https://docs.docker.com/engine/swarm/
-- https://dockerswarm.rocks/
+- https://dockerswarm.rocks
