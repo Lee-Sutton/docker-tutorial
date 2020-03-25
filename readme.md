@@ -64,10 +64,10 @@ docker run -it django-tutorial sh
 
 ```Dockerfile
 # pull official base image
-FROM python:3.8.0-alpine  # base image from docker-hub
+FROM python:3.6
 
 # set work directory
-WORKDIR /usr/src/app  # we're going to build the app in this directory in our container
+WORKDIR /usr/src/app
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -75,11 +75,17 @@ ENV PYTHONUNBUFFERED 1
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./requirements.txt /usr/src/app/requirements.txt  # copies the file from our HOST to the CONTAINER
+COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
+# copy entrypoint.sh
+COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
+
 # copy project
-COPY . /usr/src/app/  # copy our app into the host
+COPY . /usr/src/app/
+
+# run entrypoint.sh
+ENTRYPOINT ["sh", "/usr/src/app/entrypoint.sh"]
 ```
 
 -   PYTHONDONTWRITEBYTECODE: Prevents Python from writing pyc files to disc (equivalent to python -B option)
@@ -226,3 +232,11 @@ exec "$@"
     -   Deployments are more complex
     -   Multiple running containers can be more difficult to manage, setup, and debug
     -   Logging is more complex
+
+## Additional learning resources
+- Testdriven io has some excellent resources
+    - https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
+    - https://testdriven.io/blog/running-flask-on-docker-swarm/
+- The docker docs
+    - https://docs.docker.com/engine/swarm/
+- https://dockerswarm.rocks/
