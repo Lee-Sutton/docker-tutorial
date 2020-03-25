@@ -114,6 +114,7 @@ services:
 -   `web`: the name of our service (it can be anything you like)
 -   `build`: Specifies the directory of which docker file to use
 -   `command`: the command to run when the container starts in our case we want to start the django server
+-   `ports`: This maps ports running in the container to ports running on your host
 -   `volumes`: allow us to share code between our host machine and the container. This is how we can develop using docker
 
 #### Database service
@@ -180,6 +181,18 @@ exec "$@"
 
 -   **NOTE**: We can access the postgres host by using the service name "db"
 -   We don't have to use the ip address of the machine. This is called **automatic service discovery**
+
+#### Docker compose commands
+
+-   `docker-compose build` - builds the images
+-   `docker-compose up` - Starts the already built images
+-   `docker-compose up --build` - builds the images and starts the containers
+
+#### Docker compose workflow
+
+-   Typically, you'll have to run `docker-compose build` everytime you add a package
+-   Anytime I pull a new branch I always run this command
+-   If you haven't added any new packages, you can just run `docker-compose up`
 
 ## Step 5 docker swarm demo
 

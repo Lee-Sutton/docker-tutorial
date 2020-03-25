@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.8.0-alpine
+FROM python:3.6
 
 # set work directory
 WORKDIR /usr/src/app
@@ -20,4 +20,4 @@ COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 COPY . /usr/src/app/
 
 # run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["sh", "/usr/src/app/entrypoint.sh"]
